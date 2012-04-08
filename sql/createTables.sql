@@ -18,9 +18,9 @@ create table users(
 drop table if exists tickets cascade;
 create table tickets(
   id integer not null default nextval('ticket_id_seq'),
-  create_date timestamp,
-  assign_date timestamp,
-  close_date timestamp,
+  created_at timestamp,
+  assigned_at timestamp,
+  closed_at timestamp,
   creator_id integer references users(id),
   subject varchar(30),
   description text,
@@ -40,8 +40,8 @@ create table users_tickets(
 drop view if exists show_tickets cascade;
 create view show_tickets as 
   select tickets.id as t_id, tickets.creator_id, users.first_name , users.last_name, 
-  users.department, users.user_type, tickets.create_date, tickets.assign_date, 
-  tickets.close_date, tickets.subject, tickets.description, tickets.tech_notes 
+  users.department, users.user_type, tickets.created_at, tickets.assigned_at, 
+  tickets.closed_at, tickets.subject, tickets.description, tickets.tech_notes 
   from users inner join tickets on users.id=tickets.creator_id
 ;
 
