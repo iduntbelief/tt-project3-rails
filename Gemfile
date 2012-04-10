@@ -7,6 +7,9 @@ gem 'rails', '3.0.11'
 
 gem 'pg'
 
+# Use HAML for Rails views
+gem 'haml'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
