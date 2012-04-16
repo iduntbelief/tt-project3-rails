@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @tickets = ShowTickets.find_all_by_user_id(cookies.signed[:uid])
   end
 
   def login
@@ -20,9 +21,13 @@ class UsersController < ApplicationController
 
     elsif user_id > 0
       cookies.signed[:uid] = user_id
-      #redirect_to :controller => "users", :action => "index"
-      flash.now[:error] = cookies.signed[:uid]
+      redirect_to :controller => "users", :action => "index"
+      #flash.now[:error] = cookies.signed[:uid]
     end
   end
-
+  
+  def editTicket
+    @ticket = Ticket.find(params[:ticket_id].to_i)
+    render :json => @ticket
+  end
 end

@@ -41,8 +41,10 @@ drop view if exists show_tickets cascade;
 create view show_tickets as 
   select tickets.id as t_id, tickets.creator_id, users.first_name , users.last_name, 
   users.department, users.user_type, tickets.created_at, tickets.assigned_at, 
-  tickets.closed_at, tickets.subject, tickets.description, tickets.tech_notes 
-  from users inner join tickets on users.id=tickets.creator_id
+  tickets.closed_at, tickets.subject, tickets.description, tickets.tech_notes,
+  users_tickets.user_id from users 
+  inner join tickets on users.id = tickets.creator_id
+  left join users_tickets on tickets.id = users_tickets.ticket_id 
 ;
 
 -- view showing ticket assignments

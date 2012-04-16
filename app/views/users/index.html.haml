@@ -1,0 +1,7 @@
+%form{:method => "post", :action => "editTicket"}
+  %select{:name => "ticket_id", :size => "4"}
+    - @tickets.each do |t|
+      %option{:value => t.t_id}
+        = t.first_name + " " + t.last_name + ": " + t.subject
+  %br
+  %input{:type => "submit", :value => "Edit Ticket"}
