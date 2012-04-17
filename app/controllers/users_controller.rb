@@ -25,9 +25,30 @@ class UsersController < ApplicationController
       #flash.now[:error] = cookies.signed[:uid]
     end
   end
-  
+
   def editTicket
     @ticket = Ticket.find(params[:ticket_id].to_i)
-    render :json => @ticket
+    #render :json => @ticket
+  end
+
+  def newTicket
+  end
+
+  def addTicket
+    #render :text => "<h1>AddTicket</h1>"
+    cid = cookies.signed[:uid]
+    sub = params[:subject]
+    desc = params[:description]
+    #created = Time.new
+    @ticket = Ticket.new(:creator_id => cid,
+                         :subject => sub,
+                         :desciption => desc,
+                         :created_at => Time.new.xmlschema
+                        )
+    if @ticket.save
+      redirect_to :controller => "users", :action => "index"
+    else
+      flash.now[:error] = "Add Failed."
+    end 
   end
 end

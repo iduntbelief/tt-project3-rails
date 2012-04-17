@@ -5,3 +5,6 @@
         = t.first_name + " " + t.last_name + ": " + t.subject
   %br
   %input{:type => "submit", :value => "Edit Ticket"}
+%br
+%form{:method => "post", :action => "newTicket"}
+  %input{:type => "submit", :value => "Add Ticket"}
