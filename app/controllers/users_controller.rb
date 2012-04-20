@@ -25,11 +25,24 @@ class UsersController < ApplicationController
       #flash.now[:error] = cookies.signed[:uid]
     end
   end
-
+  
   def editTicket
-    @ticket = Ticket.find(params[:ticket_id].to_i)
-    #render :json => @ticket
+    @ticket = Ticket.find(params[:ticket_id])
   end
+  
+  def updateTicket
+    id = params[:id]
+    subject = params[:subject]
+    description = params[:description]
+    techNotes = params[:tech_notes]
+    @ticket = Ticket.find_by_id(id).update_attributes(:subject => subject,
+     :description => description,:tech_notes => techNotes)
+    if @ticket.save
+      redirect_to :controller => "users", :action => "index"
+    else
+      flash.now[:error] = "Edit Failed."
+    end 
+  end  
 
   def newTicket
   end
