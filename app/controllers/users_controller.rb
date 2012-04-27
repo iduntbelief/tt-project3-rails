@@ -27,7 +27,8 @@ class UsersController < ApplicationController
   end
   
   def editTicket
-    @ticket = Ticket.find(params[:ticket_id])
+    @editTicket = params[:ticket_id]
+    @ticket = Ticket.find(@editTicket)
   end
   
   def updateTicket
@@ -35,9 +36,9 @@ class UsersController < ApplicationController
     subject = params[:subject]
     description = params[:description]
     techNotes = params[:tech_notes]
-    @ticket = Ticket.find_by_id(id).update_attributes(:subject => subject,
+    @ticket = Ticket.find(id).update_attributes(:subject => subject,
      :description => description,:tech_notes => techNotes)
-    if @ticket.save
+    if @ticket == true
       redirect_to :controller => "users", :action => "index"
     else
       flash.now[:error] = "Edit Failed."

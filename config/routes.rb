@@ -4,4 +4,7 @@ TtakerRails::Application.routes.draw do
   match "users/addTicket" => "users#addTicket", :via => [:get, :post]
   get "users/newTicket"
   match "login" => "users#login", :via => [:get, :post]
+  #get "users/updateTicket"
+  #match "users/updateTicket" =>
+  match "users/updateTicket" => "users#updateTicket", :via => [:get, :post]
 end

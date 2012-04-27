@@ -1,4 +1,5 @@
 %form{:method => "post", :action => "updateTicket"}
+  %input{:type => "hidden", :name => "id", :value => @editTicket}
   Subject
   %input{:type => "text", :name => "subject", :value => @ticket.subject}
   %br
@@ -9,3 +10,4 @@
   %input{:type => "textarea", :name => "tech_notes", :value => @ticket.tech_notes}
   %br
   %input{:type => "submit", :name => "Submit"}
+  
